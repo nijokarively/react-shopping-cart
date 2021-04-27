@@ -1,13 +1,13 @@
 // Cart reducer implementation
 
 // Storing cart data into local storage. For more info: [localStorage] https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-const storageItems = (cartItems) => {
+const storeItems = (cartItems) => {
     localStorage.setItem('cart', JSON.stringify(cartItems.length > 0 ? cartItems: []));
 }
 
 // Calculating total cart information
-export const sumItems = cartItems => {
-    storageItems(cartItems);
+export const sumItems = (cartItems) => {
+    storeItems(cartItems);
     let itemCount = cartItems.reduce((total, product) => total + product.quantity, 0);
     let total = cartItems.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
     return { itemCount, total }
