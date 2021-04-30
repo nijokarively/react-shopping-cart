@@ -36,6 +36,15 @@ const bind = (method, endpoint, callback) => {
     })
 }
 
+
+
+bind('get', '/api/image/:id', async (req, res) => {
+    const { id }  = req.params;
+    const match = await db.Image.findById(id);
+    if (!match) return res.status(400).json({ error: `Image not found: id=${id}` });
+    return res.json(match);
+});
+
 bind('get', '/api/product/:id', async (req, res) => {
     const { id }  = req.params;
     const match = await db.Product.findById(id);
