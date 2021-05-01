@@ -6,6 +6,13 @@ import ProductsGrid from "./ProductsGrid";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
+function getLastWord(words) {
+  var n = words.lastIndexOf(" ");
+
+  var res = words.substring(n);
+  return res.trim();
+}
+
 const Store = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -46,22 +53,48 @@ const Store = () => {
     });
     setProducts(data);
     setLoading(false);
-  };
+  }
 
   const searchProducts = () => {
     console.log("Searching");
     const inputData = document.getElementById("search-box").value;
 
-    // TODO: logic to split filter
+    // TODO: logic to split filter Apples, >= 50 calories, Vegan
+    const parsedFilters = inputData.split(", ");
 
-    const customFilters={name:inputData}
+    var customFilters = {};
+    parsedFilters.forEach((el, index) => {
+      if (index === 0) {
+        customFilters["name"] = el;
+      } else {
+        const lastWord = getLastWord(el);
+        console.log(lastWord);
+        if (
+          [
+            "calories",
+            "protein",
+            "totalFat",
+            "fiber",
+            "sugar",
+            "saturatedFat",
+          ].includes(lastWord)
+        ) {
+          customFilters["nutrition." + lastWord] = el
+            .replace(lastWord, "")
+            .trim();
+        } else {
+          customFilters["diets"] = el;
+        }
+      }
+    });
+
     refreshData(customFilters, pageCounter);
     setFilters(customFilters);
   };
 
   if (!isLoading) {
     console.log(products);
-  };
+  }
 
   return (
     <div>
@@ -71,15 +104,23 @@ const Store = () => {
           <p>This is the Store Page.</p>
         </div>
         <form noValidate autoComplete="off">
-          <TextField id="search-box" label="Search our inventory" variant="outlined"  InputProps={{endAdornment: <Button
+          <TextField
+            id="search-box"
+            label="Search our inventory"
             variant="outlined"
-            onClick={() => {
-              searchProducts();
+            InputProps={{
+              endAdornment: (
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    searchProducts();
+                  }}
+                >
+                  SEARCH
+                </Button>
+              ),
             }}
-          >
-            SEARCH
-          </Button>}}/>
-          
+          />
         </form>
         {pageCounter > 0 ? (
           <Button

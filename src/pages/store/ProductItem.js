@@ -41,6 +41,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function objToString (obj) {
+  var str = '';
+  for (var p in obj) {
+      if (obj.hasOwnProperty(p)) {
+          str += p + ': ' + obj[p] + ', ';
+      }
+  }
+  return str.trim().slice(0, -1);;
+}
+
 export default function ProductItem({ product }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -56,13 +66,13 @@ export default function ProductItem({ product }) {
   };
 
   const allergens = product.allergens
-    ? Array.from(product.allergens).join()
+    ? Array.from(product.allergens).join(", ")
     : "N/A";
-  const badges = product.badges ? Array.from(product.badges).join() : "N/A";
+  const badges = product.badges ? Array.from(product.badges).join(", ") : "N/A";
   const nutrition = product.nutrition
-    ? JSON.stringify(product.nutrition)
+    ? objToString(product.nutrition)
     : "N/A";
-  const diets = product.diets ? Array.from(product.diets).join() : "N/A";
+  const diets = product.diets ? Array.from(product.diets).join(", ") : "N/A";
 
   return (
     <Card className={classes.root}>
