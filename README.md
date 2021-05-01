@@ -106,3 +106,17 @@ It is setup with webpack and supports HMR.
 It uses [CSS Modules](https://github.com/css-modules/css-modules) and uses [Stylus](http://stylus-lang.com) as the CSS pre-processor.
 If you haven't worked with Stylus before, it's fine, you can write normal CSS files as well or write normal CSS in Stylus (Stylus is a superset of the CSS syntax).
 
+
+## Comments
+
+I used a MVP approach. I created the ContextAPI classes (which I would replace with Redux in a proper production environment). I added the image endpoint and created the store front to display and search through the inventory. 
+
+## TODO (Maybe in the next sprint, given the due to time contraints I was not able to implement them as I hoped to):
+
+- Potentially I would modify the product endpoint to include product images as well in order to avoid making multiple REST calls.
+
+- The Cart page needs to be build to display the items in the cart as well as provide the possibility to save the list of products and view already stored lists.
+
+- I would implement Next.js for SSR, scalability and overall stabilty of the frontend solution. 
+
+- There needs to be a proper CI/CD pipeline in place for testing and deployment, ideally a K8S cluster & Docker or CloudFoundry for containerization and delivery alongside GitLab, Jenkins or CircleCI. Testing should be conducted via Enzyme for component testing and possible Selenium(Selenide) & Cucumber for proper BDD.
