@@ -92,10 +92,6 @@ const Store = () => {
     setFilters(customFilters);
   };
 
-  if (!isLoading) {
-    console.log(products);
-  }
-
   return (
     <div>
       <div>
