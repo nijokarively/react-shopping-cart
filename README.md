@@ -111,7 +111,7 @@ If you haven't worked with Stylus before, it's fine, you can write normal CSS fi
 
 I used a MVP approach. I created the ContextAPI classes (which I would replace with Redux in a proper production environment). I added the image endpoint and created the store front to display and search through the inventory. 
 
-## TODO (Maybe in the next sprint, given the due to time contraints I was not able to implement them as I hoped to):
+## TODO (Maybe in the next sprint, due to time contraints I was not able to implement them as I hoped I would):
 
 - Potentially I would modify the product endpoint to include product images as well in order to avoid making multiple REST calls.
 
